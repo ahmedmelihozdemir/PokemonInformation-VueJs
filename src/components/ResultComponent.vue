@@ -8,6 +8,7 @@
             @keypress="pokemonLookFor"
         />
         <div class="row">
+
             <!-- <div class="col col-md-6 m-auto">
                 <div
                     class="store"
@@ -23,11 +24,19 @@
                     class="store m-auto mb-2"
                     v-for="(pokemon, index) in filteredList"
                     :key="index"
-                    @click="pokemonSelected(pokemon,index+1)"
+                    @click="pokemonSelected(pokemon, index + 1)"
                 >
-                    {{index+1}}: {{ pokemon.name }}
+                    {{ index + 1 }}: {{ pokemon.name }}
+                    <img :src="getInfoPokemon.sprites.back_shiny" alt="">
                 </div>
-            </div>
+            </div>  
+
+            <!-- <ul class="list-group">
+                <li class="list-group-item col col-md-3 m-auto" v-for="(pokemon,index ) in filteredList" :key="index" @click="pokemonSelected(pokemon,index+1)">
+                    {{ index + 1 }}: {{ pokemon.name }}
+                </li>
+            </ul> --> 
+
 
             <div>
                 {{ selectedPokemon }}
@@ -37,6 +46,7 @@
 </template>
 
 <script>
+import store from "@/store";
 import { mapActions, mapGetters } from "vuex";
 export default {
     data() {
@@ -49,21 +59,24 @@ export default {
     },
     methods: {
         ...mapActions(["fetchPokemons", "fetchPokemonInformation"]),
-        pokemonSelected(e,idx) {
+        pokemonSelected(e, idx) {
             console.log(e);
             this.selectedPokemon = e;
             /* this.$router.push("/information"); */
             /* this.$router.push(`/information/${e.name}`); */
-            this.$router.push({ name: "information", params: { pokemonName: e.name } });
-            this.pokemonInformationURL = e.url;     /*işe yaramıyor şimdilik */
-            
-            console.log(idx)
+            this.$router.push({
+                name: "information",
+                params: { pokemonName: e.name },
+            });
+            this.pokemonInformationURL = e.url; /*işe yaramıyor şimdilik */
+
+            /* console.log(idx); */
             this.selectedPokemonIndex = idx;
             
         },
     },
     computed: {
-        ...mapGetters(["getPokemons","getInfoPokemon"]),
+        ...mapGetters(["getPokemons", "getInfoPokemon"]),
         filteredList() {
             return this.getPokemons.filter((pokemon) => {
                 return pokemon.name
@@ -72,10 +85,16 @@ export default {
             });
         },
     },
+    watch:{
+        selectedPokemonIndex(newIndex){
+            store.commit('setIndex', newIndex)
+            store.dispatch("fetchPokemonInformation")
+        },
+    },
 
     created() {
         this.fetchPokemons();
-        this.fetchPokemonInformation()
+        this.fetchPokemonInformation();
     },
 };
 </script>
@@ -93,13 +112,13 @@ export default {
 }
 .store {
     margin-bottom: 10px;
-    height: 50px;
-    width: 200px;
+    height: 60px;
+    width: 300px;
     border: solid 1px #42b983;
     border-radius: 5px;
     padding: 2px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 .store:hover {

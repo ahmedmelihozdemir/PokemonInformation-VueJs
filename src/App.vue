@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <nav class="nav-link">
-            <router-link class="nav-linke" to="/">Home / Pokemon Picker</router-link> |
-            <router-link class="nav-linke" to="/about">About</router-link> |
+            <router-link class="nav-linke" to="/">Home / Pokemon Picker</router-link>
+            <router-link class="nav-linke" to="/about">About</router-link>
             <router-link class="nav-linke" to="/information/pokemonName">Information</router-link>
         </nav>
         <router-view />
