@@ -9,15 +9,6 @@
         />
         <div class="row">
 
-            <!-- <div class="col col-md-6 m-auto">
-                <div
-                    class="store"
-                    v-for="(pokemon, index) in getPokemons"
-                    :key="index"
-                >
-                    {{ pokemon.name }}
-                </div>
-            </div> -->
 
             <div class="col col-md-6 m-auto">
                 <div
@@ -27,16 +18,9 @@
                     @click="pokemonSelected(pokemon, index + 1)"
                 >
                     {{ index + 1 }}: {{ pokemon.name }}
-                    <img :src="getInfoPokemon.sprites.back_shiny" alt="">
+                    <img :src="getInfoPokemon.back_shiny" alt="">
                 </div>
             </div>  
-
-            <!-- <ul class="list-group">
-                <li class="list-group-item col col-md-3 m-auto" v-for="(pokemon,index ) in filteredList" :key="index" @click="pokemonSelected(pokemon,index+1)">
-                    {{ index + 1 }}: {{ pokemon.name }}
-                </li>
-            </ul> --> 
-
 
             <div>
                 {{ selectedPokemon }}
@@ -60,7 +44,7 @@ export default {
     methods: {
         ...mapActions(["fetchPokemons", "fetchPokemonInformation"]),
         pokemonSelected(e, idx) {
-            console.log(e);
+            /* console.log(e); */
             this.selectedPokemon = e;
             /* this.$router.push("/information"); */
             /* this.$router.push(`/information/${e.name}`); */
@@ -108,7 +92,7 @@ export default {
     margin-bottom: 20px;
     padding-left: 10px;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
-        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .store {
     margin-bottom: 10px;
@@ -123,7 +107,7 @@ export default {
 }
 .store:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
-        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
     transition-duration: 0.4s;
     background-color: #42b983;
     color: white;
