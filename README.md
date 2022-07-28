@@ -1,4 +1,4 @@
-# vue-fake-api
+# vue-pokemon-information
 
 ## Project setup
 ```
