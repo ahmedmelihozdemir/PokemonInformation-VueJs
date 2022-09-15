@@ -1,4 +1,5 @@
 # vue-pokemon-information
+Application that shows information according to the pokemon you choose.
 
 ## Project setup
 ```
